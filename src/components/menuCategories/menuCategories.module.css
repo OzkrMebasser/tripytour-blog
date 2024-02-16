@@ -12,26 +12,30 @@
   font-size: 14px;
 }
 
-.categoryItem.style {
+.categoryItem.allInclusive {
   background-color: #57c4ff31;
 }
 
-.categoryItem.fashion {
+.categoryItem.guidedTours {
   background-color: #da85c731;
 }
 
-.categoryItem.food {
+.categoryItem.luxuryTravel {
   background-color: #7fb88133;
 }
 
-.categoryItem.travel {
+.categoryItem.cruisePackages {
   background-color: #ff795736;
 }
 
-.categoryItem.culture {
+.categoryItem.adventureTours {
   background-color: #ffb04f45;
 }
 
-.categoryItem.coding {
+.categoryItem.beachGetaways {
+  background-color: #5e4fff31;
+}
+
+.categoryItem.cultural-experiences {
   background-color: #5e4fff31;
 }
