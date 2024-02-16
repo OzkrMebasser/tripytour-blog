@@ -33,3 +33,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ignorar todos los archivos .env
+*.env
+
+# ignorar todos los archivos .txt
+*.txt
