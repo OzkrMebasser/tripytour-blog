@@ -17,7 +17,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:3000/api/:path*', // Proxy to Backend
+        destination: 'https://tripytour-blog.vercel.app/api/:path*', // Proxy to Backend
       },
     ]
   },
