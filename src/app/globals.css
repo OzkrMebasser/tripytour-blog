@@ -35,6 +35,34 @@ a {
   --softTextColor: #626262;
 }
 
+.blue {
+  --bg: #1E90FF;
+  --textColor: #FFFFFF;
+  --softBg: #87CEFA;
+  --softTextColor: #FFFFFF;
+}
+
+.green {
+  --bg: #228B22;
+  --textColor: #000000;
+  --softBg: #98FB98;
+  --softTextColor: #000000;
+}
+
+.orange {
+  --bg: #FFA500;
+  --textColor: #000000;
+  --softBg: #FFD700;
+  --softTextColor: #000000;
+}
+
+.purple {
+  --bg: #9400D3;
+  --textColor: #FFFFFF;
+  --softBg: #DDA0DD;
+  --softTextColor: #FFFFFF;
+}
+
 .container {
   min-height: 100vh;
   background-color: var(--bg);

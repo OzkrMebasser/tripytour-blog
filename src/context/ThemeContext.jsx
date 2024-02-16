@@ -1,6 +1,5 @@
-"use client";
-
-import { createContext, useEffect, useState } from "react";
+"use client"
+import React, { createContext, useEffect, useState } from "react";
 
 export const ThemeContext = createContext();
 
@@ -17,7 +16,43 @@ export const ThemeContextProvider = ({ children }) => {
   });
 
   const toggle = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme((currentTheme) => {
+      const themeKeys = Object.keys(themes);
+      const currentIndex = themeKeys.indexOf(currentTheme);
+      const nextIndex = (currentIndex + 1) % themeKeys.length;
+      return themeKeys[nextIndex];
+    });
+  };
+
+  const setThemeByKey = (themeKey) => {
+    setTheme(themeKey);
+  };
+
+  const themes = {
+    light: {
+      backgroundColor: "white",
+      textColor: "#643d87"
+    },
+    dark: {  
+      backgroundColor: "#363062",
+      textColor: "#ffe7cc"  
+    },
+    blue: {
+      backgroundColor: "#1E90FF",
+      textColor: "#ff9666"
+    },
+    green: {
+      backgroundColor: "#229d20",    
+      textColor: "#ffe270"   
+    },
+    orange: {
+      backgroundColor: "#d93900",  
+      textColor: "#e8f7fe"
+    },
+    purple: {
+      backgroundColor: "#671e90",
+      textColor: "#a582ff"
+    }
   };
 
   useEffect(() => {
@@ -25,7 +60,7 @@ export const ThemeContextProvider = ({ children }) => {
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggle }}>
+    <ThemeContext.Provider value={{ theme, toggle, setTheme: setThemeByKey, themes }}>
       {children}
     </ThemeContext.Provider>
   );

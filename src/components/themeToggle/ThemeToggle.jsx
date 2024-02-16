@@ -1,31 +1,47 @@
-"use client";
+"use client"
+// ThemeToggle.js
 
-import Image from "next/image";
+import React, { useContext, useState } from "react";
 import styles from "./themeToggle.module.css";
-import { useContext } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
 const ThemeToggle = () => {
-  const { toggle, theme } = useContext(ThemeContext);
+  const { theme, setTheme, themes } = useContext(ThemeContext);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleThemeChange = (selectedTheme) => {
+    setTheme(selectedTheme);
+    setShowMenu(false);
+  };
 
   return (
-    <div
-      className={styles.container}
-      onClick={toggle}
-      style={
-        theme === "dark" ? { backgroundColor: "white" } : { backgroundColor: "#0f172a" }
-      }
-    >
-      <Image src="/moon.png" alt="" width={14} height={14} />
+    <div className={`${styles.themeToggleContainer} ${theme}`}>
       <div
-        className={styles.ball}
-        style={
-          theme === "dark"
-            ? { left: 1, background: "#0f172a" }
-            : { right: 1, background: "white" }
-        }
-      ></div>
-      <Image src="/sun.png" alt="" width={14} height={14} />
+        className={styles.themeToggle}
+        onClick={() => setShowMenu(!showMenu)}
+      >
+        Theme
+      </div>
+
+      {showMenu && (
+        <div className={styles.themeDropdown}>
+          <ul>
+            {Object.keys(themes).map((themeKey) => (
+              <li
+                key={themeKey}
+                onClick={() => handleThemeChange(themeKey)}
+                className={styles[themeKey]}
+                style={{
+                  backgroundColor: themes[themeKey].hoverBg,
+                  color: themes[themeKey].hoverTextColor,
+                }}
+              >
+                {themeKey}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
