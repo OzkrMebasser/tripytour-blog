@@ -7,8 +7,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/home',
-        destination: '/',
+        source: '/',
+        destination: '/home',
         permanent: true,
       },
     ]
@@ -16,8 +16,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/auth/:path*',
-        destination: 'https://tripytour-blog.vercel.app/api/auth/:path*', // Proxy to Backend
+        source: '/api/:path*',
+        destination: 'https://tripytour-blog.vercel.app/api/:path*', // Proxy to Backend
       },
     ]
   },
