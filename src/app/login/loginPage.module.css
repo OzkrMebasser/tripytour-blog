@@ -31,13 +31,13 @@
 }
 
 .socialButton:nth-child(2) {
-  background-color: #087bea;
+  background-color: #111;
   
 }
 
-.socialButton:nth-child(3) {
+/* .socialButton:nth-child(3) {
   background-color: #111;
-}
+} */
 
 @media screen and (max-width: 768px) {
   .wrapper {

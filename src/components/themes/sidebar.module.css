@@ -1,0 +1,248 @@
+
+.sidebar {
+  position: fixed;
+  z-index: 9;
+  bottom: 30px;
+  right: 15px;
+}
+/* .themeMenu{
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  color: #fff;
+} */
+.hamburgerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 7px;
+  font-size: 1.2rem;  color: #fff;
+  background-color: #1950FF;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+.hamburgerButton:hover {
+  background-color: #00e00b;
+}
+
+.hamburgerButton .navItem__text {
+  color: #0036E0;
+  position: absolute;
+  right: 105%;
+  opacity: 0;
+  visibility: hidden;
+  cursor: default;
+  pointer-events: none;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+}
+.hamburgerButton.open {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.hamburgerButton .hamburgerIcon {
+  position: relative;
+  width: 50%;
+}
+.hamburgerButton .hamburgerIcon .hamburgerLine {
+  height: 3px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.hamburgerButton .hamburgerIcon .hamburgerLine:not(:first-child):not(:last-child) {
+  animation-name: hamburger;
+  animation-duration: 0.15s;
+  animation-delay: 0.15s;
+  transform: scaleX(0);
+}
+.hamburgerButton .hamburgerIcon .hamburgerLine, .hamburgerButton .hamburgerIcon .hamburgerLine:first-child, .hamburgerButton .hamburgerIcon .hamburgerLine:last-child {
+  animation-fill-mode: forwards;
+}
+.hamburgerButton .hamburgerIcon .hamburgerLine:first-child, .hamburgerButton .hamburgerIcon .hamburgerLine:last-child {
+  position: absolute;
+  width: 100%;
+  transform-origin: 50%;
+  transition: all 0.1s ease-out;
+  animation-duration: 0.3s;
+}
+.hamburgerButton .hamburgerIcon .hamburgerLine:first-child {
+  top: 0;
+  animation-name: hamburgerFirst;
+  transform: rotate(45deg);
+}
+.hamburgerButton .hamburgerIcon .hamburgerLine:last-child {
+  top: 0;
+  animation-name: hamburgerLast;
+  transform: rotate(-45deg);
+}
+.hamburgerButton .hamburgerIcon.hamburgerOpen .hamburgerLine:not(:first-child):not(:last-child) {
+  animation-name: hamburgerOpen;
+  transform: scaleX(100%);
+}
+.hamburgerButton .hamburgerIcon.hamburgerOpen .hamburgerLine:first-child {
+  top: -10px;
+  transform: rotate(0);
+  animation-name: hamburgerFirstOpen;
+}
+.hamburgerButton .hamburgerIcon.hamburgerOpen .hamburgerLine:last-child {
+  top: 10px;
+  transform: rotate(0);
+  animation-name: hamburgerLastOpen;
+}
+@keyframes hamburger {
+  0% {
+    transform: scaleX(0);
+ }
+  100% {
+    transform: scaleX(1);
+ }
+}
+@keyframes hamburgerOpen {
+  0% {
+    transform: scaleX(1);
+ }
+  100% {
+    transform: scaleX(0);
+ }
+}
+@keyframes hamburgerFirst {
+  0% {
+    top: 0;
+    transform: rotate(45deg);
+ }
+  50% {
+    top: 0;
+    transform: rotate(0);
+ }
+  100% {
+    top: 10px;
+    transform: rotate(0);
+ }
+}
+@keyframes hamburgerLast {
+  0% {
+    top: 0;
+    transform: rotate(-45deg);
+ }
+  50% {
+    top: 0;
+    transform: rotate(0);
+ }
+  100% {
+    top: -10px;
+    transform: rotate(0);
+ }
+}
+@keyframes hamburgerFirstOpen {
+  0% {
+    top: 10px;
+    transform: rotate(0);
+ }
+  50% {
+    top: 0;
+    transform: rotate(0);
+ }
+  100% {
+    top: 0;
+    transform: rotate(45deg);
+ }
+}
+@keyframes hamburgerLastOpen {
+  0% {
+    top: -12px;
+    transform: rotate(0);
+ }
+  50% {
+    top: 0;
+    transform: rotate(0);
+ }
+  100% {
+    top: 0;
+    transform: rotate(-45deg);
+ }
+}
+.navItem {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  background-color: #1950FF;
+  transition: all 0.2s ease-in-out;
+}
+.navItem:hover {
+  background-color: #0036E0;
+}
+.navItem:hover .navItem__text {
+  right: 120%;
+  opacity: 1;
+  visibility: visible;
+}
+.navItem:last-child {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.navItem .navItem__text {
+  color: #0036E0;
+  position: absolute;
+  right: 105%;
+  opacity: 0;
+  visibility: hidden;
+  cursor: default;
+  pointer-events: none;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+}
+.navItem svg {
+  color: #fff;
+  stroke-width: 2.5;
+  width: 26px;
+  height: 26px;
+}
+.navItem svg path {
+  fill: #fff;
+}
+.navOpen .navItem {
+  visibility: visible;
+}
+.navOpen .navItem:first-child {
+  bottom: 60px;
+  transition-duration: 0.15s;
+  z-index: -1;
+}
+.navOpen .navItem:nth-child(2) {
+  bottom: calc(60px * 2);
+  transition-duration: 0.3s;
+  z-index: -2;
+}
+.navOpen .navItem:nth-child(3) {
+  bottom: calc(60px * 3);
+  transition-duration: 0.45s;
+  z-index: -3;
+}
+.navOpen .navItem:nth-child(4) {
+  bottom: calc(60px * 4);
+  transition-duration: 0.6s;
+  z-index: -4;
+}
+.navOpen .navItem:nth-child(5) {
+  bottom: calc(60px * 5);
+  transition-duration: 0.75s;
+  z-index: -5;
+}
+.navOpen .navItem:last-child {
+  bottom: calc(60px * 6);
+  transition-duration: 0.75s;
+  z-index: -6;
+}

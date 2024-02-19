@@ -5,6 +5,7 @@ import Footer from "@/components/footer/Footer";
 import { ThemeContextProvider } from "@/context/ThemeContext";
 import ThemeProvider from "@/providers/ThemeProvider";
 import AuthProvider from "@/providers/AuthProvider";
+import Sidebar from "@/components/themes/Sidebar"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +21,11 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>
+              <Sidebar />
               <div className="container">
+              <Navbar />
                 <div className="wrapper">
-                  <Navbar />
+               
                   {children}
                   <Footer />
                 </div>

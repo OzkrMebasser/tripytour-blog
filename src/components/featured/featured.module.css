@@ -59,8 +59,14 @@
     font-size: 64px;
   }
 
+  .post {
+    display: block !important;
+  }
   .imgContainer {
-    display: none;
+    flex: 1;
+    height: 350px;
+    margin-top: 20px;
+   
   }
 }
 

@@ -13,11 +13,11 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
-// import ReactQuill from "react-quill";
+import ReactQuill from "react-quill";
 
 const WritePage = () => {
   const { status } = useSession();
-  const ReactQuill =dynamic(() => import('react-quill'), {ssr: false});
+  // const ReactQuill =dynamic(() => import('react-quill'), {ssr: false});
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -31,6 +31,7 @@ const WritePage = () => {
     const storage = getStorage(app);
     const upload = () => {
       const name = new Date().getTime() + file.name;
+      
       const storageRef = ref(storage, name);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
