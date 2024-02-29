@@ -12,27 +12,27 @@
   font-size: 14px;
 }
 
-.categoryItem.allInclusive {
+.categoryItem.all-inclusive {
   background-color: #57c4ff31;
 }
 
-.categoryItem.guidedTours {
+.categoryItem.guided-tours {
   background-color: #da85c731;
 }
 
-.categoryItem.luxuryTravel {
+.categoryItem.luxury-travel {
   background-color: #7fb88133;
 }
 
-.categoryItem.cruisePackages {
+.categoryItem.cruise-packages {
   background-color: #ff795736;
 }
 
-.categoryItem.adventureTours {
+.categoryItem.adventure-tours {
   background-color: #ffb04f45;
 }
 
-.categoryItem.beachGetaways {
+.categoryItem.beach-getaways {
   background-color: #5e4fff31;
 }
 

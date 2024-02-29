@@ -1,12 +1,12 @@
 :root {
-  --bg: #FBFBF2;
-  --textColor: black;
-  --softBg: #E5E6E4;
-  --softTextColor: #A6A2A2;
-  --navBarBg: #3f8bfd;
-  --btnsBg: #096afc;
-  --btnDisable:  #096afc60;
-  /*https://coolors.co/palette/fbfbf2-e5e6e4-cfd2cd-a6a2a2-847577*/
+  /* --bg: #4C5B7F; */
+  --textColor: #ffffff;
+  --softBg: #6d81a4;
+  --softTextColor: #c2c5cf;
+  --navBarBg: #2b3a54;
+  --btnsBg: #1f2d44;
+  --btnDisable: #1f2d4460;
+  --navTextColor:  #6d81a4;
 }
 
 * {
@@ -25,50 +25,77 @@ a {
   text-decoration: none;
 }
 
-.light {
-  --bg: #FBFBF2;
-  --textColor: black;
-  --softBg: #E5E6E4;
-  --softTextColor: #A6A2A2;
-  --navBarBg: #3f8bfd;
-  --btnsBg: #096afc;
-  --btnDisable:  #096afc60;
-}
-.dark {
-  --bg: #0d111a;
-  --textColor: #ddd;
-  --softBg: #1f273a;
-  --softTextColor: #a6a6a6;
+/* Modos de viaje */
+.adventurer {
+  background: linear-gradient(135deg, #405d27, #6b8f23);
+  --textColor: #f4f4f2;
+  --softBg: #6b8f23;
+  --softTextColor: #f4f4f2;
+  --navBarBg: #2c3e1f;
+  --btnsBg: #1e2a13;
+  --btnDisable: #1e2a1399;
 }
 
-
-
-.blue {
-  --bg: #1E90FF;
-  --textColor: #FFFFFF;
-  --softBg: #87CEFA;
-  --softTextColor: #FFFFFF;
+.romantic {
+  background-color: #e96196;
+  background: linear-gradient(120deg, #e96196 0%, #ffffff 74%);
+  --textColor: #6d213c;
+  --softBg: #ffb6b9;
+  --softTextColor: #6d213c;
+  --navBarBg: #d7828b;
+  --btnsBg: #a05268;
+  --btnDisable: #a0526899;
 }
 
-.adventurous {
-  --bg: #228B22;
-  --textColor: #000000;
-  --softBg: #98FB98;
-  --softTextColor: #000000;
+.beach {
+  background: -webkit-linear-gradient(
+    to right,
+    #0575e6,
+    #00f260
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0575e6,
+    #00f260
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  --textColor: #ffffff;
+  --softBg: #7fd3de;
+  --softTextColor: #025e73;
+  --navBarBg: #ffffff;
+  --btnsBg: #c2b280;
+  --btnDisable: #027b8e99;
+  --navTextColor: #044586;
 }
 
-.orange {
-  --bg: #FFA500;
-  --textColor: #000000;
-  --softBg: #FFD700;
-  --softTextColor: #000000;
+.relax {
+  --bg: #a4b0f5;
+  --textColor: #2c3e50;
+  --softBg: #8797d6;
+  --softTextColor: #dbdfea;
+  --navBarBg: #47597e;
+  --btnsBg: #303a52;
+  --btnDisable: #303a5299;
 }
 
-.purple {
-  --bg: #9400D3;
-  --textColor: #FFFFFF;
-  --softBg: #DDA0DD;
-  --softTextColor: #FFFFFF;
+.family {
+  --bg: #f9d5e5;
+  --textColor: #94424f;
+  --softBg: #eeac99;
+  --softTextColor: #ac3b61;
+  --navBarBg: #123c69;
+  --btnsBg: #ac3b61;
+  --btnDisable: #ac3b6199;
+}
+
+.party {
+  --bg: #ffcb47;
+  --textColor: #2e1114;
+  --softBg: #ff9a00;
+  --softTextColor: #e6e6e6;
+  --navBarBg: #c70039;
+  --btnsBg: #900c3f;
+  --btnDisable: #900c3f99;
 }
 
 .container {
@@ -82,9 +109,8 @@ a {
   max-width: 100vw;
   margin-left: auto;
   margin-right: auto;
-  /* padding-left: 80px;
-  padding-right: 80px; */
-
+  padding-left: 80px;
+  padding-right: 80px;
 }
 
 @media screen and (max-width: 1536px) {
@@ -115,10 +141,10 @@ a {
   }
 }
 
-.ql-container{
+.ql-container {
   font-size: 28px !important;
 }
 
-.quill > .ql-container > .ql-editor.ql-blank::before{
+.quill > .ql-container > .ql-editor.ql-blank::before {
   color: #b3b3b1;
 }

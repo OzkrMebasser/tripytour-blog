@@ -6,7 +6,8 @@ import Card from "../card/Card";
 
 const getData = async (page, cat) => {
   const res = await fetch(
-    `http://localhost:3000/api/posts?page=${page}&cat=${cat || ""}`,
+    // `http://localhost:3000/api/posts?page=${page}&cat=${cat || ""}`,
+    `https://tripytour-blog.vercel.app/api/posts?page=${page}&cat=${cat || ""}`,
     {
       cache: "no-store",
     }
@@ -21,8 +22,9 @@ const getData = async (page, cat) => {
 
 const CardList = async ({ page, cat }) => {
   const { posts, count } = await getData(page, cat);
+  
 
-  console.log(posts)
+  console.log(cat)
 
   const POST_PER_PAGE = 2;
 

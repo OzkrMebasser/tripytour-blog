@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <div className={`${styles.container} ${scrolled ? styles.scrolled : styles.transparent} ${scrolled ? styles.sticky : ""}`}>
-      <div className={styles.logo}>Tripytour</div>
+      <div className={styles.logo}>TRIPYTOUR</div>
       <div className={styles.links}>
     
         <Link href="/" className={styles.link}>

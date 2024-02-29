@@ -19,6 +19,7 @@
   transition: background-color 0.5s ease;
   height: 70px;
   bottom: 0;
+  color: var(--navTextColor); 
 
 }
 .sticky {
@@ -44,6 +45,8 @@
   flex: 1;
   font-size: 20px;
   right: 0;
+  margin-left: 300px;
+ 
 }
 
 @media screen and (max-width: 1280px) {
@@ -53,6 +56,7 @@
   .links {
     font-size: 18px;
     gap: 15px;
+   
   }
 }
 @media screen and (max-width: 1024px) {
@@ -62,6 +66,7 @@
   .logo {
     text-align: left;
   }
+ 
 }
 @media screen and (max-width: 768px) {
   .logo {
@@ -72,8 +77,10 @@
 @media screen and (max-width: 640px) {
   .links{
     justify-content: flex-end;
+    margin-left: 0;
   }
   .link {
     display: none;
+    /* margin-left: 0; */
   }
 }

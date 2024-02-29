@@ -111,7 +111,7 @@ const WritePage = () => {
       >
         <option value="all-inclusive">All-Inclusive Resorts</option>
         <option value="guided-tours">Guided Tours</option>
-        <option value="luxury-travel">Luxury Escapes</option>
+        <option value="luxury-travel">Luxury Travel</option>
         <option value="cruise-packages">Cruise Packages</option>
         <option value="adventure-tours">Adventure Tours</option>
         <option value="beach-getaways">Beach Getaways</option>

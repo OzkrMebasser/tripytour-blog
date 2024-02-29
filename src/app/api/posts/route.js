@@ -2,12 +2,17 @@ import { getAuthSession } from "@/utils/auth";
 import prisma from "@/utils/connect";
 import { NextResponse } from "next/server";
 
+// GET ALL POSTS
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
 
+  
   const page = searchParams.get("page");
   const cat = searchParams.get("cat");
+  // console.log('Category:', cat);
+  // console.log('Page:', page);
 
+  
   const POST_PER_PAGE = 2;
 
   const query = {
@@ -16,13 +21,16 @@ export const GET = async (req) => {
     where: {
       ...(cat && { catSlug: cat }),
     },
+    
   };
 
   try {
     const [posts, count] = await prisma.$transaction([
+      
       prisma.post.findMany(query),
       prisma.post.count({ where: query.where }),
     ]);
+    console.log(posts)
     return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
   } catch (err) {
     console.log(err);
@@ -47,10 +55,12 @@ export const POST = async (req) => {
 
   try {
     const body = await req.json();
+    // console.log(body)
     const post = await prisma.post.create({
       data: { ...body, userEmail: session.user.email },
+      
     });
-
+   
     return new NextResponse(JSON.stringify(post, { status: 200 }));
   } catch (err) {
     console.log(err);
