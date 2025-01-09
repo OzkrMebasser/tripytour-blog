@@ -1,12 +1,23 @@
 :root {
   /* --bg: #4C5B7F; */
+  background: -webkit-linear-gradient(
+    to right,
+    #0575e6,
+    #00f260
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0575e6,
+    #00f260
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   --textColor: #ffffff;
-  --softBg: #6d81a4;
-  --softTextColor: #c2c5cf;
-  --navBarBg: #2b3a54;
-  --btnsBg: #1f2d44;
-  --btnDisable: #1f2d4460;
-  --navTextColor:  #6d81a4;
+  --softBg: #7fd3de;
+  --softTextColor: #025e73;
+  --navBarBg: #ffffff;
+  --btnsBg: #c2b280;
+  --btnDisable: #027b8e99;
+  --navTextColor: #044586;
 }
 
 * {
@@ -34,6 +45,8 @@ a {
   --navBarBg: #2c3e1f;
   --btnsBg: #1e2a13;
   --btnDisable: #1e2a1399;
+  --navTextColor:  #eeb20e;
+
 }
 
 .romantic {
@@ -42,9 +55,10 @@ a {
   --textColor: #6d213c;
   --softBg: #ffb6b9;
   --softTextColor: #6d213c;
-  --navBarBg: #d7828b;
+  --navBarBg: #6d213c;
   --btnsBg: #a05268;
   --btnDisable: #a0526899;
+  --navTextColor:  #cab0c0;
 }
 
 .beach {
@@ -86,16 +100,18 @@ a {
   --navBarBg: #123c69;
   --btnsBg: #ac3b61;
   --btnDisable: #ac3b6199;
+  --navTextColor: #f9d5e5;
 }
 
 .party {
   --bg: #ffcb47;
   --textColor: #2e1114;
   --softBg: #ff9a00;
-  --softTextColor: #e6e6e6;
+  --softTextColor: #1d0404;
   --navBarBg: #c70039;
   --btnsBg: #900c3f;
   --btnDisable: #900c3f99;
+  --navTextColor:  #ffffff;
 }
 
 .container {
