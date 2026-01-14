@@ -7,7 +7,7 @@ import MenuCategories from "../menuCategories/MenuCategories";
 
 const Menu = () => {
   return (
-    <div className={styles.container}>
+    <div className="bg-yellow-500">
        <h2 className={styles.subtitle}>Discover by topic</h2>
       <h1 className={styles.title}>Categories</h1>
       <MenuCategories />

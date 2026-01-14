@@ -1,47 +1,43 @@
+// app/api/posts/route.js
+
 import { getAuthSession } from "@/utils/auth";
-import prisma from "@/utils/connect";
+import clientPromise from "@/utils/mongoConnect";
 import { NextResponse } from "next/server";
 
 // GET ALL POSTS
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
 
-  
-  const page = searchParams.get("page");
+  const page = parseInt(searchParams.get("page")) || 1;
   const cat = searchParams.get("cat");
-  // console.log('Category:', cat);
-  // console.log('Page:', page);
 
-  
   const POST_PER_PAGE = 2;
 
-  const query = {
-    take: POST_PER_PAGE,
-    skip: POST_PER_PAGE * (page - 1),
-    where: {
-      ...(cat && { catSlug: cat }),
-    },
-    
-  };
-
   try {
-    const [posts, count] = await prisma.$transaction([
-      
-      prisma.post.findMany(query),
-      prisma.post.count({ where: query.where }),
-    ]);
-    console.log(posts)
-    return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
+    const client = await clientPromise;
+    const db = client.db();
+
+    const query = cat ? { catSlug: cat } : {};
+
+    const posts = await db
+      .collection("posts")
+      .find(query)
+      .sort({ createdAt: -1 }) // Ordenar por fecha descendente
+      .skip(POST_PER_PAGE * (page - 1))
+      .limit(POST_PER_PAGE)
+      .toArray();
+
+    const count = await db.collection("posts").countDocuments(query);
+
+    return new NextResponse(JSON.stringify({ posts, count }), { status: 200 });
   } catch (err) {
-    console.log(err);
+    console.error("Error fetching posts:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ message: "Error al obtener los posts" }),
+      { status: 500 }
     );
   }
 };
-
-
-
 
 // CREATE A POST
 export const POST = async (req) => {
@@ -49,23 +45,91 @@ export const POST = async (req) => {
 
   if (!session) {
     return new NextResponse(
-      JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
+      JSON.stringify({ message: "No autenticado" }),
+      { status: 401 }
     );
   }
 
   try {
     const body = await req.json();
-    // console.log(body)
-    const post = await prisma.post.create({
-      data: { ...body, userEmail: session.user.email },
-      
-    });
-   
-    return new NextResponse(JSON.stringify(post, { status: 200 }));
+    const { title, desc, img, slug, catSlug } = body;
+
+    // Validaciones
+    if (!title || !title.trim()) {
+      return new NextResponse(
+        JSON.stringify({ message: "El título es requerido" }),
+        { status: 400 }
+      );
+    }
+
+    if (!desc || !desc.trim()) {
+      return new NextResponse(
+        JSON.stringify({ message: "El contenido es requerido" }),
+        { status: 400 }
+      );
+    }
+
+    if (!slug || !slug.trim()) {
+      return new NextResponse(
+        JSON.stringify({ message: "El slug es requerido" }),
+        { status: 400 }
+      );
+    }
+
+    if (!catSlug || !catSlug.trim()) {
+      return new NextResponse(
+        JSON.stringify({ message: "La categoría es requerida" }),
+        { status: 400 }
+      );
+    }
+
+    const client = await clientPromise;
+    const db = client.db();
+
+    // Verificar si ya existe un post con el mismo slug
+    const existingPost = await db.collection("posts").findOne({ slug });
+    
+    if (existingPost) {
+      return new NextResponse(
+        JSON.stringify({ message: "Ya existe un post con este título" }),
+        { status: 400 }
+      );
+    }
+
+    // Crear el nuevo post
+    const newPost = {
+      title: title.trim(),
+      desc: desc.trim(),
+      img: img || null,
+      slug: slug.trim(),
+      catSlug: catSlug.trim(),
+      userEmail: session.user.email,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      views: 0,
+      likes: 0,
+    };
+
+    const result = await db.collection("posts").insertOne(newPost);
+
+    if (!result.insertedId) {
+      throw new Error("Error al insertar el post");
+    }
+
+    // Retornar el post creado con el ID
+    const createdPost = {
+      ...newPost,
+      _id: result.insertedId,
+    };
+
+    return new NextResponse(JSON.stringify(createdPost), { status: 200 });
   } catch (err) {
-    console.log(err);
+    console.error("Error creating post:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ 
+        message: "Error al crear el post: " + err.message 
+      }),
+      { status: 500 }
     );
   }
 };

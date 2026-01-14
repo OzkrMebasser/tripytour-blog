@@ -1,135 +1,66 @@
-// import prisma from "@/utils/connect";
-// import { NextResponse } from "next/server";
+// app/api/posts/[slug]/route.js
 
-// export const GET = async (req, { params }) => {
-//   const { slug } = params;
-
-//   try {
-//     if (req.method === 'GET') {
-//       // Increment views on GET request
-//       const post = await prisma.post.update({
-//         where: { slug },
-//         data: { views: { increment: 1 } },
-//         include: { user: true },
-//       });
-
-//       return new NextResponse(JSON.stringify(post, { status: 200 }));
-      
-//     } else if (req.method === 'POST') {
-//       // Increment likes on POST request
-//       const updatedPost = await prisma.post.update({
-//         where: { slug },
-//         data: { likes: { increment: 1 } },
-//         include: { user: true },
-//       });
-
-//       return new NextResponse(JSON.stringify(updatedPost, { status: 200 }));
-//     } else {
-//       // Unsupported HTTP method
-//       return new NextResponse(
-//         JSON.stringify({ message: "Method not allowed" }, { status: 405 })
-//       );
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     return new NextResponse(
-//       JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
-//     );
-//   }
-// };
-
-
-import prisma from "@/utils/connect";
+import clientPromise from "@/utils/mongoConnect";
 import { NextResponse } from "next/server";
-// import { getAuthSession } from "@/utils/auth";
 
-
-
-
-// GET SINGLE POST
+// GET: Increment views and return post
 export const GET = async (req, { params }) => {
   const { slug } = params;
 
   try {
-    const post = await prisma.post.update({
-      where: { slug },
-      data: { views: { increment: 1 } },
-      include: { user: true },
-    });
+    const client = await clientPromise;
+    const db = client.db();
 
-    return new NextResponse(JSON.stringify(post, { status: 200 }));
+    const post = await db.collection("posts").findOneAndUpdate(
+      { slug },
+      { $inc: { views: 1 } },
+      { returnDocument: "after" }
+    );
+
+    if (!post.value) {
+      return new NextResponse(
+        JSON.stringify({ message: "Post not found" }),
+        { status: 404 }
+      );
+    }
+
+    return new NextResponse(JSON.stringify(post.value), { status: 200 });
   } catch (err) {
-    console.log(err);
+    console.error("Error incrementing views:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ message: "Something went wrong!" }),
+      { status: 500 }
     );
   }
 };
 
-
-// ADD LIKES ON CLICK
-
-// HANDLE LIKE
-export const handleLike = async (req, { params }) => {
+// POST: Increment likes
+export const POST = async (req, { params }) => {
   const { slug } = params;
-  // const session = await getAuthSession();
-
-  // if (!session) {
-  //   return new NextResponse(
-  //     JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
-  //   );
-  // }
 
   try {
-    const updatedPost = await prisma.post.update({
-      where: { slug },
-      data: { likes: { increment: 1 } },
-    });
+    const client = await clientPromise;
+    const db = client.db();
 
-    return new NextResponse(JSON.stringify(updatedPost, { status: 200 }));
+    const updatedPost = await db.collection("posts").findOneAndUpdate(
+      { slug },
+      { $inc: { likes: 1 } },
+      { returnDocument: "after" }
+    );
+
+    if (!updatedPost.value) {
+      return new NextResponse(
+        JSON.stringify({ message: "Post not found" }),
+        { status: 404 }
+      );
+    }
+
+    return new NextResponse(JSON.stringify(updatedPost.value), { status: 200 });
   } catch (err) {
-    console.error(err);
+    console.error("Error incrementing likes:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ message: "Something went wrong!" }),
+      { status: 500 }
     );
   }
 };
-// import prisma from "@/utils/connect";
-// import { NextResponse } from "next/server";
-
-// export const GET = async (req, { params }) => {
-//   const { slug } = params;
-
-//   try {
-//     if (req.method === 'GET') {
-//       // Increment views on GET request
-//       const post = await prisma.post.update({
-//         where: { slug },
-//         data: { views: { increment: 1 } },
-//         include: { user: true },
-//       });
-
-//       return new NextResponse(JSON.stringify(post, { status: 200 }));
-
-
-//     } else if (req.method === 'POST') {
-//       // Increment likes on POST request
-//       const updatedPost = await prisma.post.update({
-//         where: { slug },
-//         data: { likes: { increment: 1 } },
-//       });
-
-//       return new NextResponse(JSON.stringify(updatedPost, { status: 200 }));
-//     } else {
-//       // Unsupported HTTP method
-//       return new NextResponse(
-//         JSON.stringify({ message: "Method not allowed" }, { status: 405 })
-//       );
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     return new NextResponse(
-//       JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
-//     );
-//   }
-// };

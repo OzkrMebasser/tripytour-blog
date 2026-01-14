@@ -1,53 +1,56 @@
-import prisma from "@/utils/connect";
+
+
+import clientPromise from "@/utils/mongoConnect";
 import { NextResponse } from "next/server";
 
+// GET - Obtener todas las categorías
 export const GET = async () => {
   try {
-    const categories = await prisma.category.findMany();
+    const client = await clientPromise;
+    const db = client.db(); // O puedes usar db("tu_nombre_de_bd") si lo necesitas
+    const categories = await db.collection("categories").find().toArray();
 
-    return new NextResponse(JSON.stringify(categories, { status: 200 }));
+    return new NextResponse(JSON.stringify(categories), { status: 200 });
   } catch (err) {
-    console.log(err);
+    console.error("Error fetching categories:", err);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ message: "Something went wrong!" }),
+      { status: 500 }
     );
   }
 };
 
-
-// POST para crear una nueva categoría
+// POST - Crear una nueva categoría
 export const POST = async (req) => {
   try {
-    const { slug, title, img } = req.body;
+    const body = await req.json(); // 🔁 req.json() en vez de req.body
+    const { slug, title, img } = body;
 
-    // Verificar si la categoría ya existe
-    const existingCategory = await prisma.category.findUnique({
-      where: { slug },
-    });
+    const client = await clientPromise;
+    const db = client.db();
+    const existingCategory = await db.collection("categories").findOne({ slug });
 
     if (existingCategory) {
       return new NextResponse(
-        JSON.stringify({ message: "Category already exists" }, { status: 400 })
+        JSON.stringify({ message: "Category already exists" }),
+        { status: 400 }
       );
     }
 
-    // Crear la nueva categoría
-    const newCategory = await prisma.category.create({
-      data: { slug, title, img },
-    });
+    const newCategory = { slug, title, img };
+    await db.collection("categories").insertOne(newCategory);
 
-    return new NextResponse(
-      JSON.stringify(newCategory, { status: 201 }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    return new NextResponse(JSON.stringify(newCategory), {
+      status: 201,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.error("Error creating category:", error);
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+      JSON.stringify({ message: "Something went wrong!" }),
+      { status: 500 }
     );
   }
 };

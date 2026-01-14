@@ -31,16 +31,24 @@ const Navbar = () => {
     <div className={`${styles.container} ${scrolled ? styles.scrolled : styles.transparent} ${scrolled ? styles.sticky : ""}`}>
       <div className={styles.logo}>TRIPYTOUR</div>
       <div className={styles.links}>
+            {/* <Link href="/">Inicio</Link>
+          <Link href="/">Nosotros</Link>
+          <Link href="/">Categorias</Link>
+          <Link href="/">Contacto</Link> */}
     
         <Link href="/" className={styles.link}>
-          Homepage
+          Inicio
         </Link>
-        <Link href="/contact" className={styles.link}>
-          Contact
+        <Link href="/nosotros" className={styles.link}>
+          Nosotros
         </Link>
-        <Link href="/about" className={styles.link}>
-          About
+        <Link href="/categorias" className={styles.link}>
+          Categorias
         </Link>
+        <Link href="/contacto" className={styles.link}>
+          Contacto
+        </Link>
+
         <AuthLinks />
       </div>
     </div>

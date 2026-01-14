@@ -16,15 +16,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
+      
       <body className={inter.className}>
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>
               <Sidebar />
-              <div className="container">
+              <div className="colortheme ">
               <Navbar />
-                <div className="wrapper">
+                <div className="">
                
                   {children}
                   <Footer />
@@ -35,5 +36,6 @@ export default function RootLayout({ children }) {
         </AuthProvider>
       </body>
     </html>
+    
   );
 }

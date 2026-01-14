@@ -22,7 +22,7 @@ const BtnLikes = ({ slug, initialLikes }) => {
     } catch (error) {
       console.error('Error incrementando los likes:', error.message);
     }
-    console.log(response)
+    // console.log(response)
   };
 
   return (

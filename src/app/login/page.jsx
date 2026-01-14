@@ -2,20 +2,27 @@
 import { signIn, useSession } from "next-auth/react";
 import styles from "./loginPage.module.css";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const { status } = useSession();
-
+    // console.log("status", status)
   const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+    
+      router.push("/");
+    }
+  }, [status, router]);
 
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
   }
 
-  if (status === "authenticated") {
-    router.push("/")
-  }
-  
+
+    //  console.log("status", status)
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -23,7 +30,7 @@ const LoginPage = () => {
           Sign in with Google
         </div>
 
-        <div className={styles.socialButton} >Sign in with Twitter</div>
+        <div className={styles.socialButton}>Sign in with Twitter</div>
       </div>
     </div>
   );

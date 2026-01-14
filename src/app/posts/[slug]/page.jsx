@@ -7,7 +7,7 @@ import styles from './singlePage.module.css';
 
 const SinglePage = ({ params }) => {
   const { slug, likes } = params;
-  console.log(slug)
+  // console.log(slug)
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const SinglePage = ({ params }) => {
         
         likes: prevData.likes + 1,
       }));
-      console.log(prevData)
+      // console.log(prevData)
     } catch (error) {
       console.error('Error incrementing likes:', error.message);
     }

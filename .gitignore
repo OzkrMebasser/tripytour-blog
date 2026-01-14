@@ -38,4 +38,4 @@ next-env.d.ts
 *.env
 
 # ignorar todos los archivos .txt
-*.txt
+*.txt .text

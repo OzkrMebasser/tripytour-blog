@@ -7,7 +7,9 @@ import { signOut, useSession } from "next-auth/react";
 const AuthLinks = () => {
   const [open, setOpen] = useState(false);
 
-  const { status } = useSession();
+  const { status, data: session } = useSession();
+
+  // console.log(session.user.givenName)
 
   return (
     <>
@@ -22,7 +24,10 @@ const AuthLinks = () => {
           </Link>
           <span className={styles.link} onClick={signOut}>
             Logout
+          
           </span>
+          <br />
+            {/* <p>Hola, {session.user.givenName || session.user.name ? session.user.givenName || session.user.name : "USURIO"}!</p> */}
         </>
       )}
       <div className={styles.burger} onClick={() => setOpen(!open)}>
@@ -32,15 +37,18 @@ const AuthLinks = () => {
       </div>
       {open && (
         <div className={styles.responsiveMenu}>
-          <Link href="/">Homepage</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
+          <Link href="/">Inicio</Link>
+          <Link href="/">Nosotros</Link>
+          <Link href="/">Categorias</Link>
+          <Link href="/">Contacto</Link>
           {status === "unauthenticated" ? (
             <Link href="/login">Login</Link>
           ) : (
             <>
               <Link href="/write">Write</Link>
-              <span className={styles.link}>Logout</span>
+              <span className={styles.link}>Logout       </span>
+          
+              <br />
             </>
           )}
         </div>

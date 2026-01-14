@@ -73,3 +73,19 @@
   cursor: pointer;
   border-radius: 20px;
 }
+
+.textArea {
+  min-height: 300px;
+  padding: 1rem;
+  border: none;
+  outline: none;
+}
+
+.textArea :global(p) {
+  margin: 0 0 1rem;
+}
+
+.textArea :global(img) {
+  max-width: 100%;
+  border-radius: 8px;
+}

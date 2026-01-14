@@ -1,32 +1,65 @@
-"use client"
-import React from "react";
-import styles from "./featured.module.css";
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 
 const Featured = () => {
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>
-  <b>Discover Hidden Gems and Must-Visit Attractions in Every Corner of the Globe</b>
-</h1>
+    <section className="relative">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          
+          {/* TEXT */}
+          <div>
+            {/* <span className="inline-block rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-700">
+              Blog de viajes
+            </span> */}
 
-      <div className={styles.post}>
-       
-        <div className={styles.textContainer}>
-          <h1 className={styles.postTitle}>Lorem ipsum dolor sit amet alim consectetur adipisicing elit.</h1>
-          <p className={styles.postDesc}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Cupiditate, quam nisi magni ea laborum inventore voluptatum
-            laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
-            quisquam! Harum unde sit culpa debitis.
-          </p>
-          <button className={styles.button}>Read More</button>
-        </div>
-        <div className={styles.imgContainer}>
-          <Image src="/portadaBlog.jpeg" alt="" fill className={styles.image} />
+            <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+              Descubre joyas ocultas y{" "}
+              <span className="accent --tw-text-shadow-color var(--color-red-200)">
+                atracciones imprescindibles
+              </span>{" "}
+              en cada rincón del mundo
+            </h1>
+
+            <p className="mt-6 max-w-xl text-lg text-gray-600 softText">
+              Guías honestas, consejos prácticos y destinos increíbles para
+              viajeros curiosos que buscan experiencias auténticas más allá de
+              lo común.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                href="/blog"
+                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-blue-700"
+              >
+                Explorar artículos
+              </Link>
+
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+              >
+                Sobre el blog
+              </Link>
+            </div>
+          </div>
+
+          {/* IMAGE */}
+          <div className="relative h-42 w-full overflow-hidden rounded-2xl shadow-lg sm:h-96 lg:h-full">
+            <Image
+              src="/portadaBlog.jpeg"
+              alt="Destino turístico destacado"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
